@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KDV Hesaplama – KDV Dahil ve Hariç Hesaplayıcı</title>
+<meta name="description" content="KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV oranıyla ücretsiz online KDV hesaplama.">
+<link rel="canonical" href="https://kolayivar.github.io/kdv-hesaplama/">
+<link rel="alternate" hreflang="tr" href="https://kolayivar.github.io/kdv-hesaplama/"><link rel="alternate" hreflang="en" href="https://kolayivar.github.io/en/vat-calculator/"><link rel="alternate" hreflang="x-default" href="https://kolayivar.github.io/en/vat-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="KDV Hesaplama – KDV Dahil ve Hariç Hesaplayıcı"><meta property="og:description" content="KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV oranıyla ücretsiz online KDV hesaplama.">
+<meta property="og:url" content="https://kolayivar.github.io/kdv-hesaplama/"><meta property="og:site_name" content="Kolayı Var">
+<meta name="theme-color" content="#5b4dff"><meta name="google-site-verification" content="7J3s0uLsBxr-VlJ--K_NkPbTaRiS7t5doa3ILSGmdbs">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css?v=2026-11-02">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "KDV Hesaplama", "url": "https://kolayivar.github.io/kdv-hesaplama/", "description": "KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV oranıyla ücretsiz online KDV hesaplama.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "tr", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "KDV dahil fiyat nasıl hesaplanır?", "acceptedAnswer": {"@type": "Answer", "text": "KDV hariç fiyatı 1,20 ile (yüzde 20 KDV için) çarparsınız. 500 TL × 1,20 = 600 TL."}}, {"@type": "Question", "name": "KDV dahil fiyattan KDV nasıl çıkarılır?", "acceptedAnswer": {"@type": "Answer", "text": "Dahil fiyatı 1,20'ye bölersiniz. 600 TL / 1,20 = 500 TL KDV hariç fiyattır."}}, {"@type": "Question", "name": "Türkiye'de KDV oranları nedir?", "acceptedAnswer": {"@type": "Answer", "text": "Genel oran %20'dir. Bazı temel gıda ürünlerinde ve belirli hizmetlerde %10 ve %1 oranları uygulanır."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": "https://kolayivar.github.io/"}, {"@type": "ListItem", "position": 2, "name": "KDV Hesaplama", "item": "https://kolayivar.github.io/kdv-hesaplama/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="/"><i>✓</i><b>Kolayı<span>Var</span></b></a>
+<a class="lang" href="/en/vat-calculator/" hreflang="en">English</a>
+</div></header>
+<main>
+<section class="thead"><div class="wrap"><div class="crumb"><a href="/">Ana sayfa</a> › Finans ve Para</div>
+<div class="row"><span class="ic">🧾</span><h1>KDV Hesaplama</h1></div>
+<p>KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV oranıyla ücretsiz online KDV hesaplama.</p></div></section>
+<div class="wrap">
+<div class="box">
+<form id="tool" data-tool="vat" autocomplete="off"><div class="fields"><div class="field"><label for="f_mode">İşlem</label><select id="f_mode" name="mode"><option value="add" selected>KDV ekle (hariçten dahile)</option><option value="remove">KDV çıkar (dahilden hariçe)</option></select></div><div class="field"><label for="f_amount">Tutar</label><input type="number" id="f_amount" name="amount" value="1000" step="any" inputmode="decimal"></div><div class="field"><label for="f_rate">KDV oranı (%)</label><input type="number" id="f_rate" name="rate" value="20" step="any" inputmode="decimal"><div class="help">Türkiye&#x27;de genel oran %20, indirimli oranlar %10 ve %1&#x27;dir.</div></div></div>
+<button class="btn" type="submit">Hesapla</button></form>
+<div id="result" aria-live="polite"></div>
+</div>
+
+<article><h2>Nasıl hesaplanır?</h2><p>KDV (Katma Değer Vergisi), mal ve hizmet satışlarında fiyata eklenen bir tüketim vergisidir. <b>KDV dahil fiyat = KDV hariç fiyat × (1 + KDV oranı / 100)</b> formülüyle bulunur. Örneğin 1.000 TL'lik bir ürüne %20 KDV eklendiğinde KDV tutarı 200 TL, KDV dahil fiyat 1.200 TL olur.</p>
+<p>KDV dahil bir fiyattan KDV'yi çıkarmak için fiyatı <b>(1 + oran/100)</b> değerine bölmeniz gerekir. 1.200 TL'lik KDV dahil fiyatın KDV hariç tutarı 1.200 / 1,20 = 1.000 TL'dir. Sık yapılan hata, dahil fiyattan doğrudan %20 düşmektir; bu yanlış sonuç verir.</p>
+<p class="note">Türkiye'de genel KDV oranı %20'dir; bazı temel gıda ve hizmetlerde %10 ve %1 oranları uygulanır. Güncel oranlar için Gelir İdaresi Başkanlığı'nı kontrol edin.</p></article>
+<section class="faq"><h2>Sıkça Sorulan Sorular</h2><details><summary>KDV dahil fiyat nasıl hesaplanır?</summary><p>KDV hariç fiyatı 1,20 ile (yüzde 20 KDV için) çarparsınız. 500 TL × 1,20 = 600 TL.</p></details><details><summary>KDV dahil fiyattan KDV nasıl çıkarılır?</summary><p>Dahil fiyatı 1,20&#x27;ye bölersiniz. 600 TL / 1,20 = 500 TL KDV hariç fiyattır.</p></details><details><summary>Türkiye&#x27;de KDV oranları nedir?</summary><p>Genel oran %20&#x27;dir. Bazı temel gıda ürünlerinde ve belirli hizmetlerde %10 ve %1 oranları uygulanır.</p></details></section>
+
+<h2>Diğer hesaplama araçları</h2><div class="grid"><a class="card c-finance" href="/kredi-hesaplama/"><span class="ic">🏦</span><span><b>Kredi Hesaplama</b><small>İhtiyaç, taşıt ve konut kredisi aylık taksitinizi, toplam geri ödemeyi ve toplam faizi…</small></span></a><a class="card c-finance" href="/bilesik-faiz-hesaplama/"><span class="ic">📈</span><span><b>Bileşik Faiz Hesaplama</b><small>Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar…</small></span></a><a class="card c-finance" href="/kidem-tazminati-hesaplama/"><span class="ic">💼</span><span><b>Kıdem Tazminatı Hesaplama</b><small>İşe giriş ve çıkış tarihi, brüt maaş ve kıdem tazminatı tavanı ile net ve brüt kıdem…</small></span></a><a class="card c-finance" href="/kira-artis-hesaplama/"><span class="ic">🏠</span><span><b>Kira Artışı Hesaplama</b><small>Mevcut kiranızı ve TÜFE 12 aylık ortalama oranını girerek yasal kira artışını ve yeni…</small></span></a><a class="card c-math" href="/yuzde-hesaplama/"><span class="ic">％</span><span><b>Yüzde Hesaplama</b><small>Bir sayının yüzdesini, yüzde kaç olduğunu, yüzde artış ve azalışı saniyeler içinde…</small></span></a><a class="card c-math" href="/indirim-hesaplama/"><span class="ic">🏷️</span><span><b>İndirim Hesaplama</b><small>Yüzde indirimli fiyatı ve ne kadar tasarruf ettiğinizi anında hesaplayın. Ek indirim…</small></span></a></div></div>
+</main>
+<footer><div class="wrap">
+<div class="logo"><i>✓</i>Kolayı Var</div>
+<p><a href="/">Ana sayfa</a><a href="/hakkimizda/">Hakkımızda</a><a href="/gizlilik-politikasi/">Gizlilik Politikası</a><a href="/en/">English</a></p>
+<p>© 2026 Kolayı Var · Ücretsiz online hesaplama araçları</p>
+</div></footer>
+<script src="/app.js?v=2026-11-02" defer></script>
+</body>
+</html>

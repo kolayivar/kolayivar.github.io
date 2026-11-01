@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bileşik Faiz Hesaplama – Birikim ve Yatırım Getirisi</title>
+<meta name="description" content="Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar büyüyeceğini bileşik faizle hesaplayın.">
+<link rel="canonical" href="https://kolayivar.github.io/bilesik-faiz-hesaplama/">
+<link rel="alternate" hreflang="tr" href="https://kolayivar.github.io/bilesik-faiz-hesaplama/"><link rel="alternate" hreflang="en" href="https://kolayivar.github.io/en/compound-interest-calculator/"><link rel="alternate" hreflang="x-default" href="https://kolayivar.github.io/en/compound-interest-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="Bileşik Faiz Hesaplama – Birikim ve Yatırım Getirisi"><meta property="og:description" content="Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar büyüyeceğini bileşik faizle hesaplayın.">
+<meta property="og:url" content="https://kolayivar.github.io/bilesik-faiz-hesaplama/"><meta property="og:site_name" content="Kolayı Var">
+<meta name="theme-color" content="#5b4dff"><meta name="google-site-verification" content="7J3s0uLsBxr-VlJ--K_NkPbTaRiS7t5doa3ILSGmdbs">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css?v=2026-11-02">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Bileşik Faiz Hesaplama", "url": "https://kolayivar.github.io/bilesik-faiz-hesaplama/", "description": "Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar büyüyeceğini bileşik faizle hesaplayın.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "tr", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Bileşik faiz ile basit faiz arasındaki fark nedir?", "acceptedAnswer": {"@type": "Answer", "text": "Basit faizde sadece ana paraya faiz işler; bileşik faizde kazanılan faiz de ana paraya eklenir ve faiz kazanmaya başlar."}}, {"@type": "Question", "name": "Aylık ek yatırım ne kadar fark yaratır?", "acceptedAnswer": {"@type": "Answer", "text": "Uzun vadede çok büyük. Düzenli eklemeler bileşik etkiyle toplam birikimin önemli bir kısmını oluşturur."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": "https://kolayivar.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Bileşik Faiz Hesaplama", "item": "https://kolayivar.github.io/bilesik-faiz-hesaplama/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="/"><i>✓</i><b>Kolayı<span>Var</span></b></a>
+<a class="lang" href="/en/compound-interest-calculator/" hreflang="en">English</a>
+</div></header>
+<main>
+<section class="thead"><div class="wrap"><div class="crumb"><a href="/">Ana sayfa</a> › Finans ve Para</div>
+<div class="row"><span class="ic">📈</span><h1>Bileşik Faiz Hesaplama</h1></div>
+<p>Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar büyüyeceğini bileşik faizle hesaplayın.</p></div></section>
+<div class="wrap">
+<div class="box">
+<form id="tool" data-tool="compound" autocomplete="off"><div class="fields"><div class="field"><label for="f_principal">Başlangıç tutarı</label><input type="number" id="f_principal" name="principal" value="10000" step="any" inputmode="decimal"></div><div class="field"><label for="f_monthly">Aylık ek yatırım</label><input type="number" id="f_monthly" name="monthly" value="1000" step="any" inputmode="decimal"></div><div class="field"><label for="f_rate">Yıllık getiri oranı (%)</label><input type="number" id="f_rate" name="rate" value="40" step="any" inputmode="decimal"></div><div class="field"><label for="f_years">Süre (yıl)</label><input type="number" id="f_years" name="years" value="10" step="any" inputmode="decimal"></div></div>
+<button class="btn" type="submit">Hesapla</button></form>
+<div id="result" aria-live="polite"></div>
+</div>
+
+<article><h2>Nasıl hesaplanır?</h2><p>Bileşik faiz, kazandığınız faizin de bir sonraki dönemde faiz kazanmasıdır; yani "faizin faizi". Zaman uzadıkça birikim katlanarak büyür. Bu araç aylık bileşik getiri varsayar: <b>Son değer = P(1+r)<sup>n</sup> + A × ((1+r)<sup>n</sup> − 1) / r</b>. Burada r aylık oran, n ay sayısı, A aylık ek yatırımdır.</p>
+<p>Erken başlamak ve düzenli küçük tutarlar eklemek, uzun vadede büyük farklar yaratır. Yüksek enflasyon dönemlerinde getiriyi enflasyonla karşılaştırarak <b>reel getiriyi</b> de düşünmeyi unutmayın.</p>
+<p class="note">Bu hesaplama bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Gerçek getiriler değişkenlik gösterebilir; vergi ve kesintiler dahil değildir.</p></article>
+<section class="faq"><h2>Sıkça Sorulan Sorular</h2><details><summary>Bileşik faiz ile basit faiz arasındaki fark nedir?</summary><p>Basit faizde sadece ana paraya faiz işler; bileşik faizde kazanılan faiz de ana paraya eklenir ve faiz kazanmaya başlar.</p></details><details><summary>Aylık ek yatırım ne kadar fark yaratır?</summary><p>Uzun vadede çok büyük. Düzenli eklemeler bileşik etkiyle toplam birikimin önemli bir kısmını oluşturur.</p></details></section>
+
+<h2>Diğer hesaplama araçları</h2><div class="grid"><a class="card c-finance" href="/kdv-hesaplama/"><span class="ic">🧾</span><span><b>KDV Hesaplama</b><small>KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV…</small></span></a><a class="card c-finance" href="/kredi-hesaplama/"><span class="ic">🏦</span><span><b>Kredi Hesaplama</b><small>İhtiyaç, taşıt ve konut kredisi aylık taksitinizi, toplam geri ödemeyi ve toplam faizi…</small></span></a><a class="card c-finance" href="/kidem-tazminati-hesaplama/"><span class="ic">💼</span><span><b>Kıdem Tazminatı Hesaplama</b><small>İşe giriş ve çıkış tarihi, brüt maaş ve kıdem tazminatı tavanı ile net ve brüt kıdem…</small></span></a><a class="card c-finance" href="/kira-artis-hesaplama/"><span class="ic">🏠</span><span><b>Kira Artışı Hesaplama</b><small>Mevcut kiranızı ve TÜFE 12 aylık ortalama oranını girerek yasal kira artışını ve yeni…</small></span></a><a class="card c-math" href="/yuzde-hesaplama/"><span class="ic">％</span><span><b>Yüzde Hesaplama</b><small>Bir sayının yüzdesini, yüzde kaç olduğunu, yüzde artış ve azalışı saniyeler içinde…</small></span></a><a class="card c-math" href="/indirim-hesaplama/"><span class="ic">🏷️</span><span><b>İndirim Hesaplama</b><small>Yüzde indirimli fiyatı ve ne kadar tasarruf ettiğinizi anında hesaplayın. Ek indirim…</small></span></a></div></div>
+</main>
+<footer><div class="wrap">
+<div class="logo"><i>✓</i>Kolayı Var</div>
+<p><a href="/">Ana sayfa</a><a href="/hakkimizda/">Hakkımızda</a><a href="/gizlilik-politikasi/">Gizlilik Politikası</a><a href="/en/">English</a></p>
+<p>© 2026 Kolayı Var · Ücretsiz online hesaplama araçları</p>
+</div></footer>
+<script src="/app.js?v=2026-11-02" defer></script>
+</body>
+</html>
