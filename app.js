@@ -35,6 +35,99 @@
   const TRG = { AA: 4, BA: 3.5, BB: 3, CB: 2.5, CC: 2, DC: 1.5, DD: 1, FD: 0.5, FF: 0 };
   const ENG = { A: 4, 'A-': 3.7, 'B+': 3.3, B: 3, 'B-': 2.7, 'C+': 2.3, C: 2, 'C-': 1.7, 'D+': 1.3, D: 1, F: 0 };
   const tools = {
+    salary(v) {
+      const g = v.gross; if (!ok(g) || g <= 0) return null;
+      const MIN = 33030, CAP = 297270, B = [[190000, .15], [400000, .20], [1500000, .27], [5300000, .35], [Infinity, .40]];
+      const tax = m => { let t0 = 0, prev = 0; for (const [lim, r] of B) { if (m <= lim) return t0 + (m - prev) * r; t0 += (lim - prev) * r; prev = lim; } };
+      const ret = v.type === 'retired', sgkR = ret ? .075 : .14, unR = ret ? 0 : .01;
+      const minBase = MIN * (1 - .15);
+      let cum = 0, cumMin = 0; const months = [];
+      for (let i = 0; i < 12; i++) {
+        const sb = Math.min(g, CAP), sgk = sb * sgkR, un = sb * unR, base = g - sgk - un;
+        const gv = Math.max(0, (tax(cum + base) - tax(cum)) - (tax(cumMin + minBase) - tax(cumMin)));
+        const st = Math.max(0, (g - MIN) * .00759);
+        cum += base; cumMin += minBase;
+        months.push({ sgk, un, gv, st, net: g - sgk - un - gv - st });
+      }
+      const m = months[(+v.month || 1) - 1], avg = months.reduce((a, x) => a + x.net, 0) / 12;
+      const MN = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+      return { rows: [[`${MN[(+v.month || 1) - 1]} ayı net maaş`, money(m.net) + ' ₺'], ['Yıllık ortalama net', money(avg) + ' ₺'], [ret ? 'SGDP primi (%7,5)' : 'SGK işçi primi (%14)', money(m.sgk) + ' ₺'], ...(ret ? [] : [['İşsizlik sigortası (%1)', money(m.un) + ' ₺']]), ['Gelir vergisi', money(m.gv) + ' ₺'], ['Damga vergisi', money(m.st) + ' ₺'], ['Yıllık toplam net', money(avg * 12) + ' ₺']],
+        table: [['Ay', 'Gelir vergisi', 'Net maaş'], ...months.map((x, i) => [MN[i], money(x.gv), money(x.net)])] };
+    },
+    notice(v) {
+      const s = pd(v.start), e = pd(v.end); if (!s || !e || !ok(v.salary)) return null;
+      if (e <= s) return 'Çıkış tarihi işe giriş tarihinden sonra olmalı.';
+      const days = Math.round((e - s) / DAY) + 1, mo = days / 30.4375;
+      const wk = mo < 6 ? 2 : mo < 18 ? 4 : mo < 36 ? 6 : 8, gross = v.salary / 30 * wk * 7;
+      const gv = gross * (+v.gv || 15) / 100, st = gross * .00759;
+      return [['Net ihbar tazminatı', money(gross - gv - st) + ' ₺'], ['İhbar süresi', `${wk} hafta (${wk * 7} gün)`], ['Brüt ihbar tazminatı', money(gross) + ' ₺'], [`Gelir vergisi (%${v.gv || 15})`, money(gv) + ' ₺'], ['Damga vergisi', money(st) + ' ₺'], ['Çalışma süresi', ymd(ymdDiff(s, new Date(e.getTime() + DAY)))]];
+    },
+    leave(v) {
+      const s = pd(v.start), on = pd(v.on) || todayUTC(); if (!s) return null;
+      if (on <= s) return 'Hesaplanacak tarih işe giriş tarihinden sonra olmalı.';
+      const d = ymdDiff(s, on), y = d[0];
+      if (y < 1) return `Henüz 1 yılı doldurmadınız (${ymd(d)}). Yıllık izne 1 yıl çalıştıktan sonra hak kazanılır.`;
+      let days = y <= 5 ? 14 : y < 15 ? 20 : 26, note = '';
+      const b = pd(v.birth);
+      if (b) { const age = ymdDiff(b, on)[0]; if ((age < 18 || age > 50) && days < 20) { days = 20; note = `${age} yaşında olduğunuz için en az 20 gün`; } }
+      const next = new Date(Date.UTC(s.getUTCFullYear() + y + 1, s.getUTCMonth(), s.getUTCDate()));
+      const rows = [['Yıllık izin hakkınız', `${days} iş günü`], ['Kıdem', ymd(d)], ['Bir sonraki hak ediş', fd(next)]];
+      if (note) rows.push(['Not', note]);
+      return rows;
+    },
+    obp(v) {
+      const d = v.dip; if (!ok(d)) return null; if (d < 50 || d > 100) return 'Diploma notu 50 ile 100 arasında olmalı.';
+      const o = d * 5, k = v.prev ? .06 : .12;
+      return [['OBP', n(o, 2)], ['YKS yerleştirme puanına katkı', '+' + n(o * k, 2)], ['Kullanılan katsayı', String(k).replace('.', ',')]];
+    },
+    raise(v) {
+      const { old: o, val, inf, mode } = v; if (!ok(o, val) || o <= 0) return null;
+      const nw = mode === 'new' ? val : o * (1 + val / 100), pr = (nw - o) / o * 100;
+      const rows = [[mode === 'new' ? t('Zam oranı', 'Raise percentage') : t('Yeni maaş', 'New salary'), mode === 'new' ? pct(pr) : money(nw)], [t('Zam tutarı', 'Raise amount'), money(nw - o)], [t('Yıllık fark (12 ay)', 'Yearly difference (12 months)'), money((nw - o) * 12)]];
+      if (ok(inf)) { const real = ((1 + pr / 100) / (1 + inf / 100) - 1) * 100; rows.push([t('Reel zam (enflasyondan arındırılmış)', 'Real raise (after inflation)'), (real >= 0 ? '+' : '') + pct(real)]); }
+      return rows;
+    },
+    zodiac(v) {
+      const b = pd(v.birth); if (!b) return null;
+      const md = (b.getUTCMonth() + 1) * 100 + b.getUTCDate();
+      const Z = [[120, 'Oğlak', 'Capricorn', '♑', 'Toprak', 'Earth', '22 Ara – 19 Oca', 'Dec 22 – Jan 19'], [219, 'Kova', 'Aquarius', '♒', 'Hava', 'Air', '20 Oca – 18 Şub', 'Jan 20 – Feb 18'], [321, 'Balık', 'Pisces', '♓', 'Su', 'Water', '19 Şub – 20 Mar', 'Feb 19 – Mar 20'], [420, 'Koç', 'Aries', '♈', 'Ateş', 'Fire', '21 Mar – 19 Nis', 'Mar 21 – Apr 19'], [521, 'Boğa', 'Taurus', '♉', 'Toprak', 'Earth', '20 Nis – 20 May', 'Apr 20 – May 20'], [621, 'İkizler', 'Gemini', '♊', 'Hava', 'Air', '21 May – 20 Haz', 'May 21 – Jun 20'], [723, 'Yengeç', 'Cancer', '♋', 'Su', 'Water', '21 Haz – 22 Tem', 'Jun 21 – Jul 22'], [823, 'Aslan', 'Leo', '♌', 'Ateş', 'Fire', '23 Tem – 22 Ağu', 'Jul 23 – Aug 22'], [923, 'Başak', 'Virgo', '♍', 'Toprak', 'Earth', '23 Ağu – 22 Eyl', 'Aug 23 – Sep 22'], [1023, 'Terazi', 'Libra', '♎', 'Hava', 'Air', '23 Eyl – 22 Eki', 'Sep 23 – Oct 22'], [1122, 'Akrep', 'Scorpio', '♏', 'Su', 'Water', '23 Eki – 21 Kas', 'Oct 23 – Nov 21'], [1222, 'Yay', 'Sagittarius', '♐', 'Ateş', 'Fire', '22 Kas – 21 Ara', 'Nov 22 – Dec 21'], [1232, 'Oğlak', 'Capricorn', '♑', 'Toprak', 'Earth', '22 Ara – 19 Oca', 'Dec 22 – Jan 19']];
+      const z = Z.find(x => md < x[0]);
+      return [[t('Burcunuz', 'Your sign'), `${z[3]} ${t(z[1], z[2])}`], [t('Element', 'Element'), t(z[4], z[5])], [t('Tarih aralığı', 'Date range'), t(z[6], z[7])]];
+    },
+    calorie(v) {
+      const { age, h, w } = v; if (!ok(age, h, w) || age <= 0) return null;
+      const bmr = 10 * w + 6.25 * h - 5 * age + (v.sex === 'f' ? -161 : 5), td = bmr * (+v.act || 1.2), k = x => n(Math.round(x), 0) + ' kcal';
+      return [[t('Günlük kalori ihtiyacı (kiloyu korumak)', 'Daily calories to maintain weight'), k(td)], [t('Bazal metabolizma (BMR)', 'Basal metabolic rate (BMR)'), k(bmr)], [t('Kilo vermek için (yaklaşık −0,5 kg/hafta)', 'To lose weight (~0.5 kg/week)'), k(Math.max(bmr, td - 500))], [t('Kilo almak için (yaklaşık +0,25 kg/hafta)', 'To gain weight (~0.25 kg/week)'), k(td + 300)]];
+    },
+    idealw(v) {
+      const h = v.h; if (!ok(h) || h < 120 || h > 230) return h ? t('Boyu 120-230 cm arasında girin.', 'Enter a height between 120 and 230 cm.') : null;
+      const i = h / 2.54 - 60, f = v.sex === 'f', kg = x => n(x, 1) + ' kg';
+      const dev = f ? 45.5 + 2.3 * i : 50 + 2.3 * i, rob = f ? 49 + 1.7 * i : 52 + 1.9 * i, mil = f ? 53.1 + 1.36 * i : 56.2 + 1.41 * i, ham = f ? 45.5 + 2.2 * i : 48 + 2.7 * i;
+      const m2 = Math.pow(h / 100, 2);
+      return [[t('Sağlıklı kilo aralığı (VKİ 18,5–24,9)', 'Healthy weight range (BMI 18.5–24.9)'), `${n(18.5 * m2, 1)} – ${n(24.9 * m2, 1)} kg`], [t('Formüllerin ortalaması', 'Average of formulas'), kg((dev + rob + mil + ham) / 4)], ['Devine', kg(dev)], ['Robinson', kg(rob)], ['Miller', kg(mil)], ['Hamwi', kg(ham)]];
+    },
+    desi(v) {
+      const { l, w, h } = v; if (!ok(l, w, h)) return null;
+      const q = ok(v.qty) && v.qty > 0 ? Math.round(v.qty) : 1, one = l * w * h / (+v.div || 3000), tot = one * q;
+      const rows = [[t('Toplam desi', 'Total dimensional weight'), n(tot, 2) + t(' desi', ' kg')], [t('Paket başı desi', 'Per parcel'), n(one, 2) + t(' desi', ' kg')], [t('Hacim', 'Volume'), n(l * w * h / 1e6 * q, 4) + ' m³']];
+      if (ok(v.kg)) rows.splice(1, 0, [t('Ücretlendirmeye esas', 'Chargeable weight'), `${n(Math.max(tot, v.kg), 2)} ${t(tot >= v.kg ? '(desi)' : '(kg)', tot >= v.kg ? '(dimensional)' : '(actual)')}`]);
+      return rows;
+    },
+    area(v) {
+      let tot = 0, cnt = 0;
+      for (const r of v.rows) { const a = parseFloat(r.a), b = parseFloat(r.b); if (a > 0 && b > 0) { tot += a * b; cnt++; } }
+      if (!cnt) return null;
+      const rows = [[t('Toplam alan', 'Total area'), n(tot, 2) + ' m²'], [t('Fit kare', 'Square feet'), n(tot * 10.7639, 1) + ' ft²'], [t('Alan sayısı', 'Rooms'), String(cnt)]];
+      if (ok(v.price)) rows.splice(1, 0, [t('Tahmini maliyet', 'Estimated cost'), money(tot * v.price)], [t('%10 fire payıyla', 'With 10% waste'), money(tot * 1.1 * v.price)]);
+      return rows;
+    },
+    fuel(v) {
+      const { km, cons, price } = v; if (!ok(km, cons, price)) return null;
+      const d = km * (v.round ? 2 : 1), lt = d * cons / 100, cost = lt * price;
+      const rows = [[t('Toplam yakıt masrafı', 'Total fuel cost'), money(cost)], [t('Harcanacak yakıt', 'Fuel needed'), n(lt, 2) + ' L'], [t('Toplam mesafe', 'Total distance'), n(d, 0) + ' km'], [t('Km başı maliyet', 'Cost per km'), money(cost / d)]];
+      if (ok(v.people) && v.people > 1) rows.splice(1, 0, [t('Kişi başı', 'Per person'), money(cost / Math.round(v.people))]);
+      return rows;
+    },
     net(v) {
       const f = document.getElementById('tool'), p = +f.dataset.penalty, g = {}, det = [];
       let any = false, all = 0; const used = {};
@@ -243,6 +336,7 @@
     if (typeof r === 'string') { out.innerHTML = `<p class="hint warn">${esc(r)}</p>`; return; }
     const rows = Array.isArray(r) ? r : r.rows || [];
     let h = rows.length ? '<dl class="rows">' + rows.map((x, i) => `<div class="${i ? '' : 'main'}"><dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd></div>`).join('') + '</dl>' : '';
+    if (r.table) h += '<div class="tblwrap"><table class="rtable"><thead><tr>' + r.table[0].map(c => `<th>${esc(c)}</th>`).join('') + '</tr></thead><tbody>' + r.table.slice(1).map(row => '<tr>' + row.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table></div>';
     if (r.text !== undefined) h += `<textarea readonly class="outtext" aria-label="${t('Sonuç', 'Result')}">${esc(r.text)}</textarea><button type="button" class="btn copy">${t('Kopyala', 'Copy')}</button>`;
     out.innerHTML = h;
   }

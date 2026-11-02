@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zam Hesaplama – Maaş Zammı ve Zam Oranı Hesaplayıcı</title>
+<meta name="description" content="Maaşınıza yapılan zammı yüzde olarak veya yeni maaştan zam oranını hesaplayın. Enflasyonla karşılaştırın.">
+<link rel="canonical" href="https://kolayivar.github.io/zam-hesaplama/">
+<link rel="alternate" hreflang="tr" href="https://kolayivar.github.io/zam-hesaplama/"><link rel="alternate" hreflang="en" href="https://kolayivar.github.io/en/raise-calculator/"><link rel="alternate" hreflang="x-default" href="https://kolayivar.github.io/en/raise-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="Zam Hesaplama – Maaş Zammı ve Zam Oranı Hesaplayıcı"><meta property="og:description" content="Maaşınıza yapılan zammı yüzde olarak veya yeni maaştan zam oranını hesaplayın. Enflasyonla karşılaştırın.">
+<meta property="og:url" content="https://kolayivar.github.io/zam-hesaplama/"><meta property="og:site_name" content="Kolayı Var">
+<meta name="theme-color" content="#5b4dff"><meta name="google-site-verification" content="syws9cAz6nLFUVshD5CmGME3elL9ZdoD2NrrvuLHf2Q">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css?v=2026-11-03">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SS2CQNBL83"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SS2CQNBL83');</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Zam Hesaplama", "url": "https://kolayivar.github.io/zam-hesaplama/", "description": "Maaşınıza yapılan zammı yüzde olarak veya yeni maaştan zam oranını hesaplayın. Enflasyonla karşılaştırın.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "tr", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Reel zam nedir?", "acceptedAnswer": {"@type": "Answer", "text": "Enflasyondan arındırılmış zamdır; maaşınızın alım gücünün ne kadar değiştiğini gösterir."}}, {"@type": "Question", "name": "%25 zam ile 30.000 TL kaç olur?", "acceptedAnswer": {"@type": "Answer", "text": "30.000 × 1,25 = 37.500 TL."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": "https://kolayivar.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Zam Hesaplama", "item": "https://kolayivar.github.io/zam-hesaplama/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="/"><i>✓</i><b>Kolayı<span>Var</span></b></a>
+<a class="lang" href="/en/raise-calculator/" hreflang="en">English</a>
+</div></header>
+<main>
+<div class="cat-finance"><section class="thead"><div class="wrap"><div class="crumb"><a href="/">Ana sayfa</a> › Finans ve Para</div>
+<div class="row"><span class="ic">📈</span><h1>Zam Hesaplama</h1></div>
+<p>Maaşınıza yapılan zammı yüzde olarak veya yeni maaştan zam oranını hesaplayın. Enflasyonla karşılaştırın.</p></div></section>
+<div class="wrap">
+<div class="box">
+<form id="tool" data-tool="raise" autocomplete="off"><div class="fields"><div class="field wide"><label for="f_mode">Hesaplama türü</label><select id="f_mode" name="mode"><option value="pct" selected>Zam oranından yeni maaşı bul</option><option value="new">Yeni maaştan zam oranını bul</option></select></div><div class="field"><label for="f_old">Mevcut maaş</label><input type="number" id="f_old" name="old" value="30000" step="any" inputmode="decimal"></div><div class="field"><label for="f_val">Zam oranı (%) veya yeni maaş</label><input type="number" id="f_val" name="val" value="25" step="any" inputmode="decimal"></div><div class="field"><label for="f_inf">Enflasyon oranı (%) – opsiyonel</label><input type="number" id="f_inf" name="inf" step="any" inputmode="decimal"></div></div>
+<button class="btn" type="submit">Hesapla</button></form>
+<div id="result" aria-live="polite"></div>
+</div>
+
+<article><h2>Nasıl hesaplanır?</h2><p>Yeni maaş, <b>mevcut maaş × (1 + zam oranı / 100)</b> formülüyle bulunur. Zam oranını bulmak için ise <b>(yeni maaş − eski maaş) / eski maaş × 100</b> hesaplanır.</p>
+<p>Enflasyon oranını da girerseniz <b>reel zam</b> oranınızı görürsünüz: (1 + zam) / (1 + enflasyon) − 1. Reel zam negatifse, maaşınız artsa bile alım gücünüz düşmüş demektir.</p></article>
+<section class="faq"><h2>Sıkça Sorulan Sorular</h2><details><summary>Reel zam nedir?</summary><p>Enflasyondan arındırılmış zamdır; maaşınızın alım gücünün ne kadar değiştiğini gösterir.</p></details><details><summary>%25 zam ile 30.000 TL kaç olur?</summary><p>30.000 × 1,25 = 37.500 TL.</p></details></section>
+
+<h2>Diğer hesaplama araçları</h2><div class="grid"><a class="card c-finance" href="/kdv-hesaplama/"><span class="ic">🧾</span><span><b>KDV Hesaplama</b><small>KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV…</small></span></a><a class="card c-finance" href="/kredi-hesaplama/"><span class="ic">🏦</span><span><b>Kredi Hesaplama</b><small>İhtiyaç, taşıt ve konut kredisi aylık taksitinizi, toplam geri ödemeyi ve toplam faizi…</small></span></a><a class="card c-finance" href="/bilesik-faiz-hesaplama/"><span class="ic">💹</span><span><b>Bileşik Faiz Hesaplama</b><small>Ana para, yıllık getiri oranı, süre ve aylık ek yatırım ile birikiminizin ne kadar…</small></span></a><a class="card c-finance" href="/kidem-tazminati-hesaplama/"><span class="ic">💼</span><span><b>Kıdem Tazminatı Hesaplama</b><small>İşe giriş ve çıkış tarihi, brüt maaş ve kıdem tazminatı tavanı ile net ve brüt kıdem…</small></span></a><a class="card c-finance" href="/kira-artis-hesaplama/"><span class="ic">🏠</span><span><b>Kira Artışı Hesaplama</b><small>Mevcut kiranızı ve TÜFE 12 aylık ortalama oranını girerek yasal kira artışını ve yeni…</small></span></a><a class="card c-finance" href="/brutten-nete-maas-hesaplama/"><span class="new">YENİ</span><span class="ic">💰</span><span><b>Brütten Nete Maaş Hesaplama 2026</b><small>2026 vergi dilimleri, SGK kesintileri ve asgari ücret istisnasıyla brüt maaşınızın net…</small></span></a></div></div></div>
+</main>
+<footer><div class="wrap"><div class="fgrid">
+<div><div class="logo"><i>✓</i><b>Kolayı<span>Var</span></b></div><p>Ücretsiz online hesaplama araçları. Tüm hesaplamalar tarayıcınızda yapılır; girdiğiniz veriler sunucularımıza gönderilmez.</p></div>
+<div><h4>Kategoriler</h4><ul><li><a href="/#edu">Sınav ve Okul</a></li><li><a href="/#pdf">PDF ve Word Araçları</a></li><li><a href="/#finance">Finans ve Para</a></li><li><a href="/#math">Matematik ve Alışveriş</a></li><li><a href="/#health">Sağlık</a></li><li><a href="/#date">Tarih ve Zaman</a></li><li><a href="/#text">Metin ve Yazı Araçları</a></li><li><a href="/#other">Dönüştürücüler ve Araçlar</a></li></ul></div>
+<div><h4>Kolayı Var</h4><ul><li><a href="/">Ana sayfa</a></li><li><a href="/hakkimizda/">Hakkımızda</a></li><li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li><li><a href="/en/">English</a></li></ul></div>
+</div><div class="copy">© 2026 Kolayı Var</div></div></footer>
+<script src="/app.js?v=2026-11-03" defer></script>
+</body>
+</html>

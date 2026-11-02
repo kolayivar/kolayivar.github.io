@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yakıt Tüketimi Hesaplama – Yol Masrafı ve Benzin Hesabı</title>
+<meta name="description" content="Gideceğiniz mesafe, aracınızın 100 km&#x27;de yaktığı yakıt ve litre fiyatıyla yol masrafınızı ve kişi başı maliyeti hesaplayın.">
+<link rel="canonical" href="https://kolayivar.github.io/yakit-tuketimi-hesaplama/">
+<link rel="alternate" hreflang="tr" href="https://kolayivar.github.io/yakit-tuketimi-hesaplama/"><link rel="alternate" hreflang="en" href="https://kolayivar.github.io/en/fuel-cost-calculator/"><link rel="alternate" hreflang="x-default" href="https://kolayivar.github.io/en/fuel-cost-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="Yakıt Tüketimi Hesaplama – Yol Masrafı ve Benzin Hesabı"><meta property="og:description" content="Gideceğiniz mesafe, aracınızın 100 km&#x27;de yaktığı yakıt ve litre fiyatıyla yol masrafınızı ve kişi başı maliyeti hesaplayın.">
+<meta property="og:url" content="https://kolayivar.github.io/yakit-tuketimi-hesaplama/"><meta property="og:site_name" content="Kolayı Var">
+<meta name="theme-color" content="#5b4dff"><meta name="google-site-verification" content="syws9cAz6nLFUVshD5CmGME3elL9ZdoD2NrrvuLHf2Q">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css?v=2026-11-03">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SS2CQNBL83"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SS2CQNBL83');</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Yakıt Tüketimi ve Yol Masrafı Hesaplama", "url": "https://kolayivar.github.io/yakit-tuketimi-hesaplama/", "description": "Gideceğiniz mesafe, aracınızın 100 km'de yaktığı yakıt ve litre fiyatıyla yol masrafınızı ve kişi başı maliyeti hesaplayın.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "tr", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "100 km'de kaç litre yakar nasıl bulunur?", "acceptedAnswer": {"@type": "Answer", "text": "Depoyu doldurun, km'yi sıfırlayın; tekrar doldururken alınan litreyi gidilen km'ye bölüp 100 ile çarpın."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": "https://kolayivar.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Yakıt Tüketimi ve Yol Masrafı Hesaplama", "item": "https://kolayivar.github.io/yakit-tuketimi-hesaplama/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="/"><i>✓</i><b>Kolayı<span>Var</span></b></a>
+<a class="lang" href="/en/fuel-cost-calculator/" hreflang="en">English</a>
+</div></header>
+<main>
+<div class="cat-other"><section class="thead"><div class="wrap"><div class="crumb"><a href="/">Ana sayfa</a> › Dönüştürücüler ve Araçlar</div>
+<div class="row"><span class="ic">⛽</span><h1>Yakıt Tüketimi ve Yol Masrafı Hesaplama</h1></div>
+<p>Gideceğiniz mesafe, aracınızın 100 km&#x27;de yaktığı yakıt ve litre fiyatıyla yol masrafınızı ve kişi başı maliyeti hesaplayın.</p></div></section>
+<div class="wrap">
+<div class="box">
+<form id="tool" data-tool="fuel" autocomplete="off"><div class="fields"><div class="field"><label for="f_km">Mesafe (km)</label><input type="number" id="f_km" name="km" value="450" step="any" inputmode="decimal"></div><div class="field"><label for="f_cons">Ortalama tüketim (L/100 km)</label><input type="number" id="f_cons" name="cons" value="6.5" step="any" inputmode="decimal"></div><div class="field"><label for="f_price">Yakıt litre fiyatı</label><input type="number" id="f_price" name="price" value="45" step="any" inputmode="decimal"></div><div class="field"><label for="f_people">Kişi sayısı – opsiyonel</label><input type="number" id="f_people" name="people" step="1" inputmode="decimal" min="1"></div><div class="field wide"><label class="check"><input type="checkbox" name="round"> Gidiş-dönüş</label></div></div>
+<button class="btn" type="submit">Hesapla</button></form>
+<div id="result" aria-live="polite"></div>
+</div>
+
+<article><h2>Nasıl hesaplanır?</h2><p>Yol masrafı <b>Mesafe × Tüketim / 100 × Litre fiyatı</b> formülüyle bulunur. Örneğin 450 km yol, 100 km'de 6,5 litre yakan bir araçla 29,25 litre yakıt demektir.</p>
+<p>Gerçek tüketim; hız, yük, klima kullanımı, trafik ve yol eğimine göre değişir. Aracınızın gerçek ortalamasını yol bilgisayarından ya da depoyu doldurup kat edilen km'yi hesaplayarak öğrenebilirsiniz.</p></article>
+<section class="faq"><h2>Sıkça Sorulan Sorular</h2><details><summary>100 km&#x27;de kaç litre yakar nasıl bulunur?</summary><p>Depoyu doldurun, km&#x27;yi sıfırlayın; tekrar doldururken alınan litreyi gidilen km&#x27;ye bölüp 100 ile çarpın.</p></details></section>
+
+<h2>Diğer hesaplama araçları</h2><div class="grid"><a class="card c-other" href="/sifre-olusturucu/"><span class="ic">🔐</span><span><b>Güçlü Şifre Oluşturucu</b><small>Güçlü, rastgele ve güvenli şifreler oluşturun. Uzunluk, büyük/küçük harf, rakam ve sembol…</small></span></a><a class="card c-other" href="/birim-cevirici/"><span class="ic">📏</span><span><b>Birim Çevirici</b><small>Metre, kilometre, inç, feet, kilogram, pound, santigrat, fahrenhayt, dönüm, litre ve daha…</small></span></a><a class="card c-other" href="/burc-hesaplama/"><span class="new">YENİ</span><span class="ic">♈</span><span><b>Burç Hesaplama</b><small>Doğum tarihinizi girin; güneş burcunuzu, elementinizi ve burç tarih aralığını anında…</small></span></a><a class="card c-other" href="/desi-hesaplama/"><span class="new">YENİ</span><span class="ic">📦</span><span><b>Desi Hesaplama (Kargo)</b><small>Paketinizin en, boy ve yüksekliğinden kargo desisini ve ücretlendirmeye esas ağırlığı…</small></span></a><a class="card c-math" href="/yuzde-hesaplama/"><span class="ic">％</span><span><b>Yüzde Hesaplama</b><small>Bir sayının yüzdesini, yüzde kaç olduğunu, yüzde artış ve azalışı saniyeler içinde…</small></span></a><a class="card c-finance" href="/kdv-hesaplama/"><span class="ic">🧾</span><span><b>KDV Hesaplama</b><small>KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV…</small></span></a></div></div></div>
+</main>
+<footer><div class="wrap"><div class="fgrid">
+<div><div class="logo"><i>✓</i><b>Kolayı<span>Var</span></b></div><p>Ücretsiz online hesaplama araçları. Tüm hesaplamalar tarayıcınızda yapılır; girdiğiniz veriler sunucularımıza gönderilmez.</p></div>
+<div><h4>Kategoriler</h4><ul><li><a href="/#edu">Sınav ve Okul</a></li><li><a href="/#pdf">PDF ve Word Araçları</a></li><li><a href="/#finance">Finans ve Para</a></li><li><a href="/#math">Matematik ve Alışveriş</a></li><li><a href="/#health">Sağlık</a></li><li><a href="/#date">Tarih ve Zaman</a></li><li><a href="/#text">Metin ve Yazı Araçları</a></li><li><a href="/#other">Dönüştürücüler ve Araçlar</a></li></ul></div>
+<div><h4>Kolayı Var</h4><ul><li><a href="/">Ana sayfa</a></li><li><a href="/hakkimizda/">Hakkımızda</a></li><li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li><li><a href="/en/">English</a></li></ul></div>
+</div><div class="copy">© 2026 Kolayı Var</div></div></footer>
+<script src="/app.js?v=2026-11-03" defer></script>
+</body>
+</html>

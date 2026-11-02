@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Günlük Kalori İhtiyacı Hesaplama – Bazal Metabolizma (BMR)</title>
+<meta name="description" content="Yaş, boy, kilo ve aktivite düzeyinize göre bazal metabolizma hızınızı ve günlük kalori ihtiyacınızı hesaplayın.">
+<link rel="canonical" href="https://kolayivar.github.io/gunluk-kalori-ihtiyaci-hesaplama/">
+<link rel="alternate" hreflang="tr" href="https://kolayivar.github.io/gunluk-kalori-ihtiyaci-hesaplama/"><link rel="alternate" hreflang="en" href="https://kolayivar.github.io/en/calorie-calculator/"><link rel="alternate" hreflang="x-default" href="https://kolayivar.github.io/en/calorie-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="Günlük Kalori İhtiyacı Hesaplama – Bazal Metabolizma (BMR)"><meta property="og:description" content="Yaş, boy, kilo ve aktivite düzeyinize göre bazal metabolizma hızınızı ve günlük kalori ihtiyacınızı hesaplayın.">
+<meta property="og:url" content="https://kolayivar.github.io/gunluk-kalori-ihtiyaci-hesaplama/"><meta property="og:site_name" content="Kolayı Var">
+<meta name="theme-color" content="#5b4dff"><meta name="google-site-verification" content="syws9cAz6nLFUVshD5CmGME3elL9ZdoD2NrrvuLHf2Q">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css?v=2026-11-03">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SS2CQNBL83"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SS2CQNBL83');</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Günlük Kalori İhtiyacı Hesaplama", "url": "https://kolayivar.github.io/gunluk-kalori-ihtiyaci-hesaplama/", "description": "Yaş, boy, kilo ve aktivite düzeyinize göre bazal metabolizma hızınızı ve günlük kalori ihtiyacınızı hesaplayın.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "tr", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TRY"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "BMR ile TDEE farkı nedir?", "acceptedAnswer": {"@type": "Answer", "text": "BMR dinlenme halindeki harcamadır; TDEE günlük aktiviteleri de içeren toplam ihtiyaçtır."}}, {"@type": "Question", "name": "Hangi formül kullanılıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Mifflin-St Jeor formülü."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana sayfa", "item": "https://kolayivar.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Günlük Kalori İhtiyacı Hesaplama", "item": "https://kolayivar.github.io/gunluk-kalori-ihtiyaci-hesaplama/"}]}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="/"><i>✓</i><b>Kolayı<span>Var</span></b></a>
+<a class="lang" href="/en/calorie-calculator/" hreflang="en">English</a>
+</div></header>
+<main>
+<div class="cat-health"><section class="thead"><div class="wrap"><div class="crumb"><a href="/">Ana sayfa</a> › Sağlık</div>
+<div class="row"><span class="ic">🔥</span><h1>Günlük Kalori İhtiyacı Hesaplama</h1></div>
+<p>Yaş, boy, kilo ve aktivite düzeyinize göre bazal metabolizma hızınızı ve günlük kalori ihtiyacınızı hesaplayın.</p></div></section>
+<div class="wrap">
+<div class="box">
+<form id="tool" data-tool="calorie" autocomplete="off"><div class="fields"><div class="field"><label for="f_sex">Cinsiyet</label><select id="f_sex" name="sex"><option value="m" selected>Erkek</option><option value="f">Kadın</option></select></div><div class="field"><label for="f_age">Yaş</label><input type="number" id="f_age" name="age" value="30" step="any" inputmode="decimal"></div><div class="field"><label for="f_h">Boy (cm)</label><input type="number" id="f_h" name="h" value="175" step="any" inputmode="decimal"></div><div class="field"><label for="f_w">Kilo (kg)</label><input type="number" id="f_w" name="w" value="75" step="any" inputmode="decimal"></div><div class="field wide"><label for="f_act">Aktivite düzeyi</label><select id="f_act" name="act"><option value="1.2">Hareketsiz (masa başı)</option><option value="1.375" selected>Az hareketli (haftada 1-3 gün spor)</option><option value="1.55">Orta (haftada 3-5 gün)</option><option value="1.725">Çok hareketli (haftada 6-7 gün)</option><option value="1.9">Ağır fiziksel iş / sporcu</option></select></div></div>
+<button class="btn" type="submit">Hesapla</button></form>
+<div id="result" aria-live="polite"></div>
+</div>
+
+<article><h2>Nasıl hesaplanır?</h2><p>Bazal metabolizma hızı (BMR), vücudunuzun dinlenme halinde harcadığı enerjidir. Bu araç bilimsel olarak en çok kullanılan <b>Mifflin-St Jeor</b> formülünü kullanır. Günlük toplam ihtiyaç (TDEE), BMR'nin aktivite katsayısıyla çarpılmasıyla bulunur.</p>
+<p>Sonuçlar ortalama bir tahmindir; kas oranı, hormonlar ve sağlık durumu ihtiyacı değiştirebilir.</p>
+<p class="note">Bu araç bilgilendirme amaçlıdır. Beslenme planı için diyetisyen veya doktorunuza danışın.</p></article>
+<section class="faq"><h2>Sıkça Sorulan Sorular</h2><details><summary>BMR ile TDEE farkı nedir?</summary><p>BMR dinlenme halindeki harcamadır; TDEE günlük aktiviteleri de içeren toplam ihtiyaçtır.</p></details><details><summary>Hangi formül kullanılıyor?</summary><p>Mifflin-St Jeor formülü.</p></details></section>
+
+<h2>Diğer hesaplama araçları</h2><div class="grid"><a class="card c-health" href="/vucut-kitle-indeksi-hesaplama/"><span class="ic">⚖️</span><span><b>Vücut Kitle İndeksi Hesaplama</b><small>Boy ve kilonuzu girerek vücut kitle indeksinizi (VKİ / BMI) ve boyunuza göre normal kilo…</small></span></a><a class="card c-health" href="/gebelik-haftasi-hesaplama/"><span class="ic">🤰</span><span><b>Gebelik Haftası ve Doğum Tarihi Hesaplama</b><small>Son adet tarihinizi girerek kaç haftalık hamile olduğunuzu ve tahmini doğum tarihinizi…</small></span></a><a class="card c-health" href="/ideal-kilo-hesaplama/"><span class="new">YENİ</span><span class="ic">🎯</span><span><b>İdeal Kilo Hesaplama</b><small>Boyunuza ve cinsiyetinize göre ideal kilonuzu dört farklı formülle ve sağlıklı kilo…</small></span></a><a class="card c-math" href="/yuzde-hesaplama/"><span class="ic">％</span><span><b>Yüzde Hesaplama</b><small>Bir sayının yüzdesini, yüzde kaç olduğunu, yüzde artış ve azalışı saniyeler içinde…</small></span></a><a class="card c-finance" href="/kdv-hesaplama/"><span class="ic">🧾</span><span><b>KDV Hesaplama</b><small>KDV dahil ve KDV hariç fiyatı anında hesaplayın. %1, %10, %20 veya istediğiniz KDV…</small></span></a><a class="card c-finance" href="/kredi-hesaplama/"><span class="ic">🏦</span><span><b>Kredi Hesaplama</b><small>İhtiyaç, taşıt ve konut kredisi aylık taksitinizi, toplam geri ödemeyi ve toplam faizi…</small></span></a></div></div></div>
+</main>
+<footer><div class="wrap"><div class="fgrid">
+<div><div class="logo"><i>✓</i><b>Kolayı<span>Var</span></b></div><p>Ücretsiz online hesaplama araçları. Tüm hesaplamalar tarayıcınızda yapılır; girdiğiniz veriler sunucularımıza gönderilmez.</p></div>
+<div><h4>Kategoriler</h4><ul><li><a href="/#edu">Sınav ve Okul</a></li><li><a href="/#pdf">PDF ve Word Araçları</a></li><li><a href="/#finance">Finans ve Para</a></li><li><a href="/#math">Matematik ve Alışveriş</a></li><li><a href="/#health">Sağlık</a></li><li><a href="/#date">Tarih ve Zaman</a></li><li><a href="/#text">Metin ve Yazı Araçları</a></li><li><a href="/#other">Dönüştürücüler ve Araçlar</a></li></ul></div>
+<div><h4>Kolayı Var</h4><ul><li><a href="/">Ana sayfa</a></li><li><a href="/hakkimizda/">Hakkımızda</a></li><li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li><li><a href="/en/">English</a></li></ul></div>
+</div><div class="copy">© 2026 Kolayı Var</div></div></footer>
+<script src="/app.js?v=2026-11-03" defer></script>
+</body>
+</html>
