@@ -141,7 +141,35 @@
       if (!any) return null;
       const tot = Object.entries(g).filter(([k]) => used[k]).map(([k, x]) => [`${k} toplam net`, n(x, 2)]);
       if (f.dataset.total) tot.unshift(['Toplam net', n(all, 2)]);
-      return [...tot, ...det];
+      const sc = f.dataset.score; if (!sc) return [...tot, ...det];
+      const N = {}; for (const r of v.rows) N[r.group + '|' + r.label] = (parseFloat(r.d) || 0) - (parseFloat(r.y) || 0) / p;
+      const g2 = k => N[k] || 0, sp = [];
+      if (sc === 'kpss') {
+        const gy = g['Genel Yetenek'] || 0, gk = g['Genel Kültür'] || 0, tn = gy + gk;
+        if (gy < 1 || gk < 1) return ['KPSS puanının hesaplanması için Genel Yetenek ve Genel Kültür testlerinin her ikisinden de en az 1 net gerekir.'].join('');
+        const lo = Math.min(100, 49.30 + .4225 * tn), hi = Math.min(100, 54 + .40 * tn);
+        sp.push(['Tahmini KPSS P3 puanı', `${n(Math.min(lo, hi), 1)} – ${n(Math.max(lo, hi), 1)}`], ['Toplam net', n(tn, 2)]);
+      } else if (sc === 'lgs') {
+        const L = k => g2('LGS|' + k);
+        const ms = 178.05 + 4.53 * L('Türkçe') + 4.65 * L('Matematik') + 4.12 * L('Fen Bilimleri') + 1.94 * L('T.C. İnkılap Tarihi') + 1.99 * L('Din Kültürü') + 1.69 * L('Yabancı Dil');
+        sp.push(['Tahmini LGS puanı', n(Math.max(100, Math.min(500, ms)), 2) + ' / 500'], ['Toplam net', n(all, 2) + ' / 90']);
+      } else if (sc === 'yks') {
+        const T = k => g2('TYT|' + k), A = k => g2('AYT|' + k);
+        const tr = T('Türkçe'), mt = T('Temel Matematik'), so = T('Sosyal Bilimler'), fe = T('Fen Bilimleri');
+        if (tr < .5 && mt < .5) return 'TYT puanı için Türkçe veya Temel Matematik testinden en az 0,5 net gerekir.';
+        const dip = Number.isFinite(v.dip) ? Math.max(50, Math.min(100, v.dip)) : 50, obp = dip * 5 * (v.prev ? .06 : .12);
+        const tyt = 100 + 3.3 * (tr + mt) + 3.4 * (so + fe), base = 100 + 1.32 * (tr + mt) + 1.36 * (so + fe);
+        const say = A('Matematik') * 3 + A('Fizik') * 2.85 + A('Kimya') * 3.07 + A('Biyoloji') * 3.07;
+        const ea = A('Matematik') * 3 + A('Türk Dili ve Edebiyatı') * 3 + A('Tarih-1') * 2.8 + A('Coğrafya-1') * 3.33;
+        const soz = A('Türk Dili ve Edebiyatı') * 3 + A('Tarih-1') * 2.8 + A('Coğrafya-1') * 3.33 + A('Tarih-2') * 2.91 + A('Coğrafya-2') * 2.91 + A('Felsefe Grubu') * 3 + A('Din Kültürü') * 3.33;
+        const row = (nm, ham) => sp.push([`${nm} yerleştirme puanı (tahmini)`, n(ham + obp, 2)], [`${nm} ham puanı`, n(ham, 2)]);
+        row('TYT', tyt);
+        if (A('Fizik') + A('Kimya') + A('Biyoloji') > 0) row('SAY', base + say);
+        if (A('Türk Dili ve Edebiyatı') + A('Tarih-1') + A('Coğrafya-1') > 0 && A('Matematik') > 0) row('EA', base + ea);
+        if (A('Tarih-2') + A('Coğrafya-2') + A('Felsefe Grubu') + A('Din Kültürü') > 0) row('SÖZ', base + soz);
+        sp.push(['OBP katkısı', '+' + n(obp, 2)]);
+      }
+      return [...sp, ...tot, ...det];
     },
     gpa(v) {
       const sc = L === 'tr' ? TRG : ENG; let cr = 0, pts = 0;
