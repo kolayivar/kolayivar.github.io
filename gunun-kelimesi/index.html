@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ec">
+  <meta name="description" content="Her gün yenilenen beş harfli kelime bulmacasını çöz. Altı tahmin hakkın, günlük serin ve paylaşabileceğin sonuçların var.">
+  <link rel="canonical" href="https://kolayivar.github.io/gunun-kelimesi/">
+  <meta property="og:type" content="website"><meta property="og:title" content="Günün Kelimesi – Kolayı Var"><meta property="og:description" content="Her gün aynı beş harfli kelimeyi altı tahminde bul. Ücretsiz oyna ve sonucunu paylaş."><meta property="og:url" content="https://kolayivar.github.io/gunun-kelimesi/"><meta property="og:site_name" content="Kolayı Var">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Günün Kelimesi – Her gün bir kelime | Kolayı Var</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS2CQNBL83"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SS2CQNBL83');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4846653256268972" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Kolayı Var ana sayfa"><span class="brand-mark">✓</span><span>Kolayı<span class="brand-accent">Var</span></span></a>
+    <nav aria-label="Ana gezinme"><a href="/deneme-takip/">Deneme Takip Defteri</a><a href="#nasil-oynanir">Nasıl oynanır?</a><a href="#hakkinda">Hakkında</a></nav>
+    <button class="icon-button" id="help-button" aria-label="Nasıl oynanır?" title="Nasıl oynanır?">?</button>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow"><span class="live-dot"></span> BUGÜNÜN BULMACASI <span id="today-date"></span></div>
+      <h1 id="page-title">Günün <em>kelimesini</em> bul.</h1>
+      <p class="hero-copy">Beş harf. Altı tahmin. Herkes için aynı kelime.<br>Yarın yeni bir bulmaca, yeni bir seri.</p>
+
+      <div class="game-layout">
+        <div class="board-wrap">
+          <div id="game-board" class="board" role="grid" aria-label="Altı satır ve beş harften oluşan bulmaca tahtası"></div>
+          <p id="game-message" class="game-message" aria-live="polite">Bir kelime yazıp Enter'a bas.</p>
+          <div id="keyboard" class="keyboard" aria-label="Ekran klavyesi"></div>
+          <div class="game-actions"><button id="share-button" class="share-button" disabled>Sonucunu paylaş <span aria-hidden="true">↗</span></button><span id="share-note" class="share-note" aria-live="polite"></span></div>
+        </div>
+
+        <aside class="side-panel">
+          <div class="panel-top"><span class="panel-kicker">BUGÜNÜN DURUMU</span><span class="sparkle">✳</span></div>
+          <div class="stats"><div><strong id="streak">0</strong><span>günlük seri</span></div><div><strong id="played">0</strong><span>oyun</span></div></div>
+          <div class="divider"></div>
+          <div class="how-mini"><span class="mini-icon">↵</span><div><b>Kelimeyi tahmin et</b><p>Her tahminden sonra harflerin rengi değişir.</p></div></div>
+          <div class="legend"><div><span class="tile demo correct">K</span><span>Doğru harf, doğru yer</span></div><div><span class="tile demo present">A</span><span>Kelimenin içinde, yeri yanlış</span></div><div><span class="tile demo absent">R</span><span>Kelimenin içinde yok</span></div></div>
+          <div class="return-note"><span>☀</span><p>Bugünlük bu kadar. <b>Yarın yeni kelimede görüşürüz.</b></p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-section" id="nasil-oynanir">
+      <div class="section-heading"><span class="section-label">KISA VE TATLI BİR MOLA</span><h2>Nasıl oynanır?</h2><p>Günün kelimesini bulmak için altı tahmin hakkın var. Başlamak için kelimeyi yazman yeterli.</p></div>
+      <div class="steps">
+        <article><span class="step-no">01</span><h3>Beş harfli bir kelime yaz</h3><p>Türkçe karakterleri kullanabilirsin. Tahminini Enter tuşuyla gönder.</p></article>
+        <article><span class="step-no">02</span><h3>Renkli ipuçlarını oku</h3><p>Yeşil doğru yeri, sarı kelimedeki yanlış yeri gösterir. Gri harf kelimede yoktur.</p></article>
+        <article><span class="step-no">03</span><h3>Sonucunu paylaş</h3><p>Kelimeyi açıklamadan kareli sonuç tablonu arkadaşlarına gönderebilirsin.</p></article>
+      </div>
+    </section>
+
+    <section class="content-section about-section" id="hakkinda">
+      <div class="section-heading"><span class="section-label">HER GÜN BİR KELİME</span><h2>Küçük bir oyun, günlük bir alışkanlık.</h2><p>Günün Kelimesi, Türkçe kelimelerle oynanan ücretsiz bir günlük bulmaca denemesidir. Her gün aynı kelimeyi çöz, serini koru ve sonucu paylaş. Oyun tarayıcında çalışır; tahminlerin sunucuya gönderilmez.</p></div>
+      <div class="about-foot"><span>✳ Yeni kelime her gün</span><span>◇ Ücretsiz oyna</span><span>↗ Sonuçlarını paylaş</span></div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faq-title">
+      <span class="section-label">MERAK EDİLENLER</span><h2 id="faq-title">Sık sorulan sorular</h2>
+      <details><summary>Günün kelimesi ne zaman değişir?</summary><p>Bulmaca Türkiye saatiyle gece yarısında yenilenir. Böylece Türkiye'deki herkes aynı gün aynı kelimeyi çözer.</p></details>
+      <details><summary>Oynamak ücretsiz mi?</summary><p>Evet. Hesap açmadan ve ücret ödemeden oynayabilirsin.</p></details>
+      <details><summary>Sonuçlarım kaydediliyor mu?</summary><p>Günlük seri ve tamamladığın oyun sayısı yalnızca bu tarayıcıda saklanır. Tarayıcı verilerini temizlersen sıfırlanabilir.</p></details>
+      <details><summary>Kelimeyi arkadaşlarımla paylaşabilir miyim?</summary><p>Paylaş düğmesi, kelimeyi göstermeyen renkli bir sonuç özeti oluşturur.</p></details>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="/"><span class="brand-mark">✓</span><span>Kolayı<span class="brand-accent">Var</span></span></a><p>Her gün kendine ayırdığın beş dakika.</p><div class="footer-links"><a href="/">Ana sayfa</a><a href="/deneme-takip/">Deneme Takip Defteri</a><a href="/hakkimizda/">Hakkında</a><a href="/gizlilik-politikasi/">Gizlilik</a><a href="https://github.com/kolayivar/kolayivar.github.io/issues" rel="noopener noreferrer">Hata bildir</a></div><small>© <span id="year"></span> Kolayı Var · Günün Kelimesi</small></footer>
+</body>
+</html>

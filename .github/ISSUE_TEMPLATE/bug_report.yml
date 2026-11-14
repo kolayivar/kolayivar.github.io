@@ -1,0 +1,35 @@
+name: Hata bildirimi
+description: Siteyle ilgili tekrar edebildiğin bir hatayı bildir.
+title: "[Hata]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Lütfen şifre, hesap bilgisi veya başka kişisel bilgi paylaşma."
+  - type: input
+    id: page
+    attributes:
+      label: Hatanın görüldüğü sayfa
+      placeholder: https://kolayivar.github.io/...
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Tarayıcı ve cihaz
+      placeholder: Chrome / Android
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Tekrarlama adımları
+      description: Hatanın nasıl oluştuğunu sırayla yaz.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen ve gerçekleşen sonuç
+    validations:
+      required: true
