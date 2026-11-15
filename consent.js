@@ -2,16 +2,15 @@
   'use strict';
   const KEY = 'kv_privacy_choice_v1';
   const GA_ID = 'G-SS2CQNBL83';
-  const ADS_ID = 'ca-pub-4846653256268972';
   const en = document.documentElement.lang === 'en';
   const copy = en ? {
-    title: 'Your privacy choices', body: 'Kolayı Var uses optional analytics to understand visits and optional advertising cookies to support the site. Choose which optional technologies may run. You can change this choice at any time.',
-    necessary: 'Necessary only', stats: 'Allow analytics', all: 'Allow all', settings: 'Cookie settings', close: 'Close',
-    heading: 'Optional technologies', analytics: 'Analytics: anonymous site usage and page activity measurements.', ads: 'Advertising: Google AdSense cookies and ad measurement.', save: 'Save choices'
+    title: 'Your privacy choices', body: 'Optional Google Analytics helps us understand which tools are useful. Advertising is currently disabled. You can change your analytics choice at any time.',
+    necessary: 'Necessary only', stats: 'Allow analytics', settings: 'Cookie settings', close: 'Close',
+    heading: 'Optional technologies', analytics: 'Analytics: page and feature usage measurements. Calculator inputs and files are not collected.', save: 'Save choices'
   } : {
-    title: 'Gizlilik tercihin', body: 'Kolayı Var, ziyaretleri anlamak için isteğe bağlı analiz; siteyi desteklemek için isteğe bağlı reklam çerezleri kullanır. Hangi isteğe bağlı teknolojilerin çalışacağını seç. Tercihini istediğin zaman değiştirebilirsin.',
-    necessary: 'Yalnızca gerekli', stats: 'Analitiğe izin ver', all: 'Tümüne izin ver', settings: 'Çerez ayarları', close: 'Kapat',
-    heading: 'İsteğe bağlı teknolojiler', analytics: 'Analitik: site kullanımı ve sayfa etkinliği ölçümü.', ads: 'Reklam: Google AdSense çerezleri ve reklam ölçümü.', save: 'Tercihleri kaydet'
+    title: 'Gizlilik tercihin', body: 'İsteğe bağlı Google Analytics, hangi araçların yararlı olduğunu anlamamıza yardımcı olur. Reklamlar şu anda etkin değil. Analitik tercihini istediğin zaman değiştirebilirsin.',
+    necessary: 'Yalnızca gerekli', stats: 'Analitiğe izin ver', settings: 'Çerez ayarları', close: 'Kapat',
+    heading: 'İsteğe bağlı teknolojiler', analytics: 'Analitik: sayfa ve özellik kullanım ölçümleri. Hesaplama girdileri ve dosyalar toplanmaz.', save: 'Tercihleri kaydet'
   };
 
   window.dataLayer = window.dataLayer || [];
@@ -28,24 +27,14 @@
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
     window.gtag('js', new Date()); window.gtag('config', GA_ID);
   }
-  function loadAds() {
-    // Google's EEA/UK/CH rules require a Google-certified CMP integrated with IAB TCF.
-    // Until that CMP is active, never load AdSense from this custom preference panel.
-    if (typeof window.__tcfapi !== 'function') return;
-    if (document.querySelector('script[data-kv-ads]')) return;
-    const s = document.createElement('script'); s.async = true; s.dataset.kvAds = '1';
-    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADS_ID;
-    s.crossOrigin = 'anonymous'; document.head.appendChild(s);
-  }
   function apply(choice) {
     window.gtag('consent', 'update', {
       analytics_storage: choice.analytics ? 'granted' : 'denied',
-      ad_storage: choice.ads ? 'granted' : 'denied',
-      ad_user_data: choice.ads ? 'granted' : 'denied',
-      ad_personalization: choice.ads ? 'granted' : 'denied'
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
     if (choice.analytics) loadAnalytics();
-    if (choice.ads) loadAds();
   }
   window.kvTrack = (name, params = {}) => {
     let choice; try { choice = JSON.parse(localStorage.getItem(KEY)); } catch (_) {}
@@ -59,17 +48,15 @@
       wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-modal', 'true'); wrap.setAttribute('aria-labelledby', 'kv-consent-title');
       document.body.appendChild(wrap);
     }
-    const panel = saved ? `<div class="kv-consent-settings"><h3>${copy.heading}</h3><label><input id="kv-analytics" type="checkbox"> ${copy.analytics}</label><label><input id="kv-ads" type="checkbox"> ${copy.ads}</label><button class="kv-button kv-primary" id="kv-save">${copy.save}</button></div>` : '';
-    wrap.innerHTML = `<div class="kv-consent-card"><button class="kv-close" id="kv-close" aria-label="${copy.close}">×</button><h2 id="kv-consent-title">${copy.title}</h2><p>${copy.body} <a href="${en?'/en/privacy-policy/':'/gizlilik-politikasi/'}">${en?'Privacy policy':'Gizlilik Politikası'}</a></p>${panel}<div class="kv-actions">${saved?'':`<button class="kv-button" id="kv-necessary">${copy.necessary}</button><button class="kv-button" id="kv-stats">${copy.stats}</button><button class="kv-button kv-primary" id="kv-all">${copy.all}</button>`}</div></div>`;
+    const panel = saved ? `<div class="kv-consent-settings"><h3>${copy.heading}</h3><label><input id="kv-analytics" type="checkbox"> ${copy.analytics}</label><button class="kv-button kv-primary" id="kv-save">${copy.save}</button></div>` : '';
+    wrap.innerHTML = `<div class="kv-consent-card"><button class="kv-close" id="kv-close" aria-label="${copy.close}">×</button><h2 id="kv-consent-title">${copy.title}</h2><p>${copy.body} <a href="${en?'/en/privacy-policy/':'/gizlilik-politikasi/'}">${en?'Privacy policy':'Gizlilik Politikası'}</a></p>${panel}<div class="kv-actions">${saved?'':`<button class="kv-button" id="kv-necessary">${copy.necessary}</button><button class="kv-button kv-primary" id="kv-stats">${copy.stats}</button>`}</div></div>`;
     wrap.hidden = false;
     if (saved) {
       let current = {}; try { current = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) {}
-      wrap.querySelector('#kv-analytics').checked = !!current.analytics; wrap.querySelector('#kv-ads').checked = !!current.ads;
-      wrap.querySelector('#kv-save').onclick = () => save({analytics:wrap.querySelector('#kv-analytics').checked,ads:wrap.querySelector('#kv-ads').checked});
+      wrap.querySelector('#kv-analytics').checked = !!current.analytics;
+      wrap.querySelector('#kv-save').onclick = () => save({analytics:wrap.querySelector('#kv-analytics').checked});
     } else {
-      wrap.querySelector('#kv-necessary').onclick = () => save({analytics:false,ads:false});
-      wrap.querySelector('#kv-stats').onclick = () => save({analytics:true,ads:false});
-      wrap.querySelector('#kv-all').onclick = () => save({analytics:true,ads:true});
+      wrap.querySelector('#kv-stats').onclick = () => save({analytics:true});
     }
     wrap.querySelector('#kv-close').onclick = () => { wrap.hidden = true; };
   }

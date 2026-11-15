@@ -31,4 +31,4 @@ Bu rehber, site trafiğini hızlıca kontrol etmek içindir. Analytics yalnızca
 
 ## Search Console site haritası
 
-Gönderilen `/sitemap.xml` kaydı şu an “Getirilemedi” ve 0 keşfedilen sayfa gösteriyor. Dosya tarayıcıda XML olarak açılıyor; bu, Googlebot'un başarıyla okuduğu anlamına gelmiyor. Yeni yayımlanan dosya/önbellek için zaman tanı, sonra Search Console > Site Haritaları'ndaki hata ayrıntısını aç. Canlı dosya `/sitemap.xml` adresinde 200 durum kodu ve XML içerik döndürmeli. Sitede `robots.txt` sitemap adresini bildiriyor.
+16 Kasım 2026'da Search Console'daki eski `/sitemap.xml` kaydı kaldırılıp güncel dosya yeniden gönderildi. Önceki tablodaki “Getirilemedi” ve 0 keşfedilen sayfa bilgisi eski gönderime aitti; yeniden gönderimden hemen sonra raporun güncellenmesi zaman alabilir. Sitemap 89 URL içeriyor, `robots.txt` sitemap adresini bildiriyor ve canlı XML dosyasının tarayıcıda açıldığı doğrulandı. Search Console > Site Haritaları'nda son durum ve Google'ın ayrıntı hata mesajı takip edilmeli; tarayıcıda açılması Googlebot'un başarılı taradığını tek başına kanıtlamaz.

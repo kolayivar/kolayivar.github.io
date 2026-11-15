@@ -11,7 +11,7 @@ This site includes or uses the following third-party software and data services.
 ## Data and hosted assets
 
 - **Open-Meteo geocoding and weather data** are requested by the city weather pages. The site displays attribution and uses the data under the applicable terms and CC BY 4.0 attribution requirements. The free API is limited to non-commercial use; Open-Meteo lists advertising-supported websites as commercial. Do not enable ads on the weather feature while using the free endpoint. If the site becomes ad-supported, obtain a commercial API licence or replace the data source first. [Terms](https://open-meteo.com/en/terms) · [Attribution licence](https://open-meteo.com/en/license).
-- **Google Fonts** are loaded from Google's hosted Fonts service; Plus Jakarta Sans, DM Sans and Manrope are licensed under the SIL Open Font License (OFL). Fonts are not bundled in this repository. [Plus Jakarta Sans OFL](https://github.com/tokotype/PlusJakartaSans/blob/master/OFL.txt) · [DM Sans licence](https://github.com/googlefonts/dm-fonts) · [Manrope OFL](https://github.com/google/fonts/blob/main/ofl/manrope/OFL.txt).
+- Google Fonts requests were removed from HTML on 2026-11-16. The site now uses system font fallbacks; no external font files are loaded.
 - `adsense-logo.png` and `favicon.svg` are project assets; no third-party stock-photo or illustration files were found in the repository scan. Ownership/provenance of project-created assets and quiz wording still depends on the original author records.
 
 The site's original HTML, CSS, JavaScript, branding and written copy have no repository-wide open-source licence declaration. No license is granted here to reuse those project materials. Contact the site owner before reuse.

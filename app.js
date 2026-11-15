@@ -322,8 +322,53 @@
     }
   };
 
-  // Home page search
+  // Keep recently used tool links locally so returning visitors can resume quickly.
+  const RECENT_TOOLS_KEY = 'kv_recent_tools_v1';
+  window.kvRememberTool = () => {
+    try {
+      const href = location.pathname.endsWith('/') ? location.pathname : location.pathname + '/';
+      if (href === '/' || href === '/en/') return;
+      const url = new URL(href, location.origin);
+      if (url.origin !== location.origin) return;
+      const title = document.querySelector('main h1')?.textContent?.trim() || document.title;
+      const previous = JSON.parse(localStorage.getItem(RECENT_TOOLS_KEY) || '[]');
+      const recent = Array.isArray(previous) ? previous.filter(item => item && item.href !== href) : [];
+      recent.unshift({ href, title });
+      localStorage.setItem(RECENT_TOOLS_KEY, JSON.stringify(recent.slice(0, 8)));
+    } catch (_) { /* Private browsing or storage restrictions should not affect a tool. */ }
+  };
+
+  // Home page search and the device-only recent-tools panel.
   const q = document.getElementById('q');
+  function renderRecentTools() {
+    if (!q) return;
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem(RECENT_TOOLS_KEY) || '[]'); } catch (_) {}
+    const english = L === 'en';
+    const validLinks = new Set([...document.querySelectorAll('.cat .card[href]')].map(a => new URL(a.href).pathname));
+    items = (Array.isArray(items) ? items : []).filter(item => item && validLinks.has(item.href) && (english ? item.href.startsWith('/en/') : !item.href.startsWith('/en/'))).slice(0, 6);
+    if (!items.length) return;
+    const section = document.createElement('section');
+    section.className = 'recent-tools';
+    section.setAttribute('aria-labelledby', 'recent-tools-title');
+    const heading = document.createElement('div'); heading.className = 'recent-tools-heading';
+    const title = document.createElement('h2'); title.id = 'recent-tools-title'; title.textContent = english ? 'Pick up where you left off' : 'Kaldığın yerden devam et';
+    const clear = document.createElement('button'); clear.type = 'button'; clear.className = 'recent-tools-clear'; clear.textContent = english ? 'Clear history' : 'Geçmişi temizle';
+    clear.addEventListener('click', () => { try { localStorage.removeItem(RECENT_TOOLS_KEY); } catch (_) {} section.remove(); });
+    heading.append(title, clear);
+    const grid = document.createElement('div'); grid.className = 'grid';
+    items.forEach(item => {
+      const link = document.createElement('a'); link.className = 'card recent-tool'; link.href = item.href;
+      const icon = document.createElement('span'); icon.className = 'ic'; icon.textContent = '↻';
+      const text = document.createElement('span'); const name = document.createElement('b'); name.textContent = item.title;
+      const hint = document.createElement('small'); hint.textContent = english ? 'Open this tool again' : 'Aracı yeniden aç';
+      text.append(name, hint); link.append(icon, text); grid.appendChild(link);
+    });
+    section.append(heading, grid);
+    const anchor = document.querySelector('.daily-features') || document.querySelector('.catnav');
+    if (anchor) anchor.after(section);
+  }
+  renderRecentTools();
   let searchTimer, lastSearch = '';
   if (q) q.addEventListener('input', () => {
     const s = q.value.toLocaleLowerCase(loc).trim();
@@ -334,6 +379,8 @@
       daily.querySelectorAll('.feature-group').forEach(group => { group.hidden = !!s && ![...group.querySelectorAll('.daily-card')].some(c => !c.hidden); });
       daily.hidden = !!s && ![...daily.querySelectorAll('.daily-card')].some(c => !c.hidden);
     }
+    const recent = document.querySelector('.recent-tools');
+    if (recent) recent.hidden = !!s && ![...recent.querySelectorAll('.card')].some(c => !c.hidden);
     clearTimeout(searchTimer);
     if (s && s !== lastSearch) searchTimer = setTimeout(() => {
       lastSearch = s;
@@ -374,7 +421,11 @@
     let r; try { r = tools[id](read()); } catch (e) { r = null; }
     if (r == null) { out.innerHTML = `<p class="hint">${t('Değerleri girin, sonuç anında burada görünecek.', 'Enter your values and the result will appear here instantly.')}</p>`; return; }
     if (typeof r === 'string') { out.innerHTML = `<p class="hint warn">${esc(r)}</p>`; return; }
-    if (!trackedToolUse && window.kvTrack) { trackedToolUse = true; window.kvTrack('tool_used', { tool_id: id }); }
+    if (!trackedToolUse) {
+      trackedToolUse = true;
+      if (window.kvTrack) window.kvTrack('tool_used', { tool_id: id });
+      if (window.kvRememberTool) window.kvRememberTool();
+    }
     const rows = Array.isArray(r) ? r : r.rows || [];
     let h = rows.length ? '<dl class="rows">' + rows.map((x, i) => `<div class="${i ? '' : 'main'}"><dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd></div>`).join('') + '</dl>' : '';
     if (r.table) h += '<div class="tblwrap"><table class="rtable"><thead><tr>' + r.table[0].map(c => `<th>${esc(c)}</th>`).join('') + '</tr></thead><tbody>' + r.table.slice(1).map(row => '<tr>' + row.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table></div>';
