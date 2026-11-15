@@ -186,3 +186,4 @@ td,th{border:1px solid var(--line);padding:8px;text-align:left}
 /* Daily hub: show its three main actions together. */
 .daily-features{grid-template-columns:1fr}.daily-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:760px){.daily-features{grid-template-columns:1fr}.daily-grid{grid-template-columns:1fr}}
+.daily-card{--feature:var(--brand)}.daily-card:hover{border-color:var(--feature)}.daily-card .feature-icon{background:color-mix(in srgb,var(--feature) 12%,var(--card))}.daily-card strong{color:var(--feature)}.daily-heading h2{margin-top:8px}
