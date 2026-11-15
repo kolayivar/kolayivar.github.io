@@ -324,6 +324,7 @@
 
   // Home page search
   const q = document.getElementById('q');
+  let searchTimer, lastSearch = '';
   if (q) q.addEventListener('input', () => {
     const s = q.value.toLocaleLowerCase(loc).trim();
     document.querySelectorAll('.card').forEach(c => { c.hidden = s && !c.textContent.toLocaleLowerCase(loc).includes(s); });
@@ -333,6 +334,11 @@
       daily.querySelectorAll('.feature-group').forEach(group => { group.hidden = !!s && ![...group.querySelectorAll('.daily-card')].some(c => !c.hidden); });
       daily.hidden = !!s && ![...daily.querySelectorAll('.daily-card')].some(c => !c.hidden);
     }
+    clearTimeout(searchTimer);
+    if (s && s !== lastSearch) searchTimer = setTimeout(() => {
+      lastSearch = s;
+      if (window.kvTrack) window.kvTrack('site_search', { results_count: document.querySelectorAll('.card:not([hidden]),.daily-card:not([hidden])').length, query_length: Array.from(s).length });
+    }, 700);
   });
 
   const form = document.getElementById('tool');
@@ -363,10 +369,12 @@
     }
     return v;
   }
+  let trackedToolUse = false;
   function run() {
     let r; try { r = tools[id](read()); } catch (e) { r = null; }
     if (r == null) { out.innerHTML = `<p class="hint">${t('Değerleri girin, sonuç anında burada görünecek.', 'Enter your values and the result will appear here instantly.')}</p>`; return; }
     if (typeof r === 'string') { out.innerHTML = `<p class="hint warn">${esc(r)}</p>`; return; }
+    if (!trackedToolUse && window.kvTrack) { trackedToolUse = true; window.kvTrack('tool_used', { tool_id: id }); }
     const rows = Array.isArray(r) ? r : r.rows || [];
     let h = rows.length ? '<dl class="rows">' + rows.map((x, i) => `<div class="${i ? '' : 'main'}"><dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd></div>`).join('') + '</dl>' : '';
     if (r.table) h += '<div class="tblwrap"><table class="rtable"><thead><tr>' + r.table[0].map(c => `<th>${esc(c)}</th>`).join('') + '</tr></thead><tbody>' + r.table.slice(1).map(row => '<tr>' + row.map(c => `<td>${esc(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table></div>';

@@ -51,7 +51,7 @@
     else if(guesses.length===MAX){done=true;message.textContent=`Bugünün kelimesi: ${answer.toLocaleUpperCase('tr-TR')}`;}
     else message.textContent=guesses.length===MAX-1?'Son tahminin!':'Güzel gidiyor, devam et.';
     persist();renderBoard();renderKeyboard();updateStats();
-    if(done){document.querySelector('#share-button').disabled=false;}
+    if(done){if(window.kvTrack)window.kvTrack('word_puzzle_completed',{result:guesses.includes(answer)?'solved':'missed'});document.querySelector('#share-button').disabled=false;}
   }
   let toastTimer;function toast(t){message.textContent=t;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{if(!done)message.textContent='Bir kelime yazıp Enter\'a bas.';},1700);}
   document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='Enter')submit();else if(e.key==='Backspace')removeLetter();else if(Array.from(e.key).length===1&&/^[a-zçğıöşü]$/i.test(e.key))addLetter(e.key);});
