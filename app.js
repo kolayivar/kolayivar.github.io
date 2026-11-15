@@ -329,7 +329,10 @@
     document.querySelectorAll('.card').forEach(c => { c.hidden = s && !c.textContent.toLocaleLowerCase(loc).includes(s); });
     document.querySelectorAll('.cat').forEach(sec => { sec.hidden = ![...sec.querySelectorAll('.card')].some(c => !c.hidden); });
     const daily = document.querySelector('.daily-features');
-    if (daily) daily.hidden = s && ![...daily.querySelectorAll('.daily-card')].some(c => !c.hidden);
+    if (daily) {
+      daily.querySelectorAll('.feature-group').forEach(group => { group.hidden = !!s && ![...group.querySelectorAll('.daily-card')].some(c => !c.hidden); });
+      daily.hidden = !!s && ![...daily.querySelectorAll('.daily-card')].some(c => !c.hidden);
+    }
   });
 
   const form = document.getElementById('tool');
